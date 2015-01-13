@@ -1,0 +1,23 @@
+{
+  "name": "uppsalajs",
+  "version": "0.0.0",
+  "description": "ExectuionContexts and the Event Loop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davidxcheng/uppsalajs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidxcheng/uppsalajs/issues"
+  },
+  "homepage": "https://github.com/davidxcheng/uppsalajs",
+  "dependencies": {
+    "koa": "^0.14.0",
+    "koa-static": "^1.4.8"
+  }
+}
