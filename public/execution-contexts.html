@@ -5,23 +5,21 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-    <div class="left">
+    <div class="menu">
         <div class="overview">
             <h1>Execution Contexts</h1>
             <ol>
                 <li><a href="" data-content-link="what1">What?</a></li>
-                <li><a href="" data-content-link="why">Why?</a></li>
+                <li><a href="" data-content-link="why1">Why?</a></li>
                 <li><a href="" data-content-link="how1">How?</a></li>
             </ol>
         </div>
     </div>
     <div class="right">
         <div id="content" class="content"></div>
-        <center>
         <div id="footer">
             <ol id="pag" class="pagination"></ol>
         </div>
-        </center>
     </div>
     <script src="js/util.js"></script>
     <script src="js/click-jacker.js"></script>
@@ -34,68 +32,138 @@
         <cite><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript 5, page 57</a></cite>
     </script>
 
-    <script id="wha-pag" type="text/content">
-        <li><a href="" data-content-link="what1"></a></li>
-        <li><a href="" data-content-link="what2"></a></li>
-        <li><a href="" data-content-link="what3"></a></li>
+    <script id="why-pag" type="text/content">
+        <li><a href="" data-content-link="why1"></a></li>
+        <li><a href="" data-content-link="why2"></a></li>
     </script>
 
-    <script id="what2" type="text/content">
-        <h2>What? Spec for impl of </h2>
-        <pre>
-            <code>
-function mama(a, b) {
-    // Lexical Environment with Environment Record
-    var c = "hi";
-    
-    function kid(txt) {
-        // Lexical Environment with Environment Record
-    }
+    <script id="how-pag" type="text/content">
+        <li><a href="" data-content-link="how1"></a></li>
+        <li><a href="" data-content-link="how2"></a></li>
+        <li><a href="" data-content-link="how3"></a></li>
+        <li><a href="" data-content-link="how4"></a></li>
+    </script> 
 
-    function child() {
-        // Lexical Environment with Environment Record
-        console.log(txt);
-    }
-
-    child(c);
-}
-
-mama("foo", 2);
-            </code>
-        </pre>
-    </script>  
-
-    <script id="what3" type="text/content">
-        <h2>What? Spec for impl of </h2>
-        <pre>
-            <code>
-
-            </code>
-        </pre>
+    <script id="what13" type="text/content">
+        <h2>What?</h2>
+        <ul>
+            <li>Implement JavaScript</li>
+            <li><b>Understand</b> JavaScript</li>
+        </ul>
     </script>    
 
-    <script id="why" type="text/content">
-        <h2>Why <b class="subtle">care</b>?</h2>
+    <script id="why1" type="text/content">
+        <h2>Why?</h2>
         <ul>
             <li>Implement JavaScript</li>
             <li>Understand JavaScript</li>
         </ul>
     </script>
 
+    <script id="why2" type="text/content">
+        <h2>Helps explain this</h2>
+        <pre>
+            <code>
+function contrived(a) {
+    var b = "foo " + a;
+    
+    nested(this.name); // this?
+
+    function nested(c) {
+        console.log(b); // b?
+        console.log(c); // console?
+    }
+}
+
+contrived.call({ name: "baz" }, "bar");
+> foo baz
+> bar
+            </code>
+        </pre>
+    </script> 
+
     <script id="how1" type="text/content">
-        <h2>How?</h2>
-        <ol>
-            <li>Set <i class="var">strict</i> to <i class="val">true</i> or <i class="val">false</i></li>
-            <li>Create <i class="var">arguments</i></li>
-        </ol>
+        <h2>&nbsp;</h2>
+        <p>
+            &ldquo;A new execution context is created whenever control is transferred from the executable code associated with the currently running execution context to executable code that is not associated with that execution context.&rdquo;
+        </p>
+        <cite><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript 5, page 56</a></cite>
     </script>
 
     <script id="how2" type="text/content">
-        <h2>How?</h2>
+        <h2>Entering Function Code</h2>
         <ol>
-            <li>Set <i class="var">strict</i> to <i class="val">true</i> or <i class="val">false</i></li>
-            <li>Create <i class="var">arguments</i></li>
+            <li>Bind <i class="var">this</i> (defaults to global object if strict is not used)</li>
+            <li>Create a new <i class="var">DeclarativeEnvironment</i> passing in the value of the [[Scope]]...</li>
+            <li>...and assign it to the <i class="var">LexicalEnvironment</i></li>
+            <li>
+                Perform Declaration Binding Instantiation using the function code and argument list
+                <ol>
+                    <li>Create properties and bind values for the <i>FormalParameters</i></li>
+                    <li>Create properties and bind values for each <i>FunctionDeclaration</i></li>
+                    <li>Create the <i>arguments</i> object</li>
+                    <li>Create properties for each <i>VariableDeclaration</i> (but dont bind values)</li>
+                </ol>
+            </li>
         </ol>
+    </script>
+
+    <script id="how3" type="text/content">
+        <h2>Pseudo-Code</h2>
+        <pre>
+            <code>
+function contrived(a) {
+    var b = "foo " + a;
+    nested(this.name); 
+    function nested(c) { ... }
+}
+
+contrived.call({ name: "baz" }, "bar"); // <-- Create Execution Context
+
+ExecutionContext: {
+    this: refToObj,
+    lexEnv: {
+        outerLexEnv: outerLexEnv,
+        a: "bar",
+        nested: function(),
+        b: undefined
+    } 
+}
+            </code>
+        </pre>
+    </script> 
+
+    <script id="how4" type="text/content">
+        <h2>&nbsp;</h2>
+        <p>
+            &ldquo;The newly created execution context is pushed onto the stack and becomes the running execution context.&rdquo;
+        </p>
+        <cite><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript 5, page 57</a></cite>
+        <div style="position: relative; margin-top: 80px;">
+            <div class="stack-wrapper">
+                <div class="stack running">nested</div>
+                <div class="stack middle">contrived</div>
+                <div class="stack global">global</div>
+            </div>
+            <pre class="explained">
+                <code>
+function contrived(a) {
+    var b = "foo " + a;
+    
+    nested(this.name); // this?
+
+    function nested(c) {
+        console.log(b); // b?
+        console.log(c); // console?
+    }
+}
+
+contrived.call({ name: "baz" }, "bar");
+> foo baz
+> bar
+                </code>
+            </pre>
+        </div>
     </script>
 </body>
 </html>
