@@ -99,17 +99,16 @@ contrived.call({ name: "baz" }, "bar");
             <li>
                 Perform Declaration Binding Instantiation using the function code and argument list
                 <ol>
-                    <li>Create properties and bind values for the <i>FormalParameters</i></li>
-                    <li>Create properties and bind values for each <i>FunctionDeclaration</i></li>
-                    <li>Create the <i>arguments</i> object</li>
-                    <li>Create properties for each <i>VariableDeclaration</i> (but dont bind values)</li>
+                    <li>Create properties and bind values for the <i class="var">FormalParameters</i></li>
+                    <li>Create properties and bind values for each <i class="var">FunctionDeclaration</i></li>
+                    <li>Create the <i class="var">arguments</i> object</li>
+                    <li>Create properties for each <i class="var">VariableDeclaration</i> (but dont bind values)</li>
                 </ol>
             </li>
         </ol>
     </script>
 
     <script id="how3" type="text/content">
-        <h2>Pseudo-Code</h2>
         <pre>
             <code>
 function contrived(a) {
@@ -117,15 +116,16 @@ function contrived(a) {
     nested(this.name); 
     function nested(c) { ... }
 }
-
 contrived.call({ name: "baz" }, "bar"); // <-- Create Execution Context
 
+// Pseudo-code
 ExecutionContext: {
     this: refToObj,
     lexEnv: {
         outerLexEnv: outerLexEnv,
         a: "bar",
         nested: function(),
+        arguments: { 0: "bar", length: 1 },
         b: undefined
     } 
 }
@@ -139,12 +139,7 @@ ExecutionContext: {
             &ldquo;The newly created execution context is pushed onto the stack and becomes the running execution context.&rdquo;
         </p>
         <cite><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript 5, page 57</a></cite>
-        <div style="position: relative; margin-top: 80px;">
-            <div class="stack-wrapper">
-                <div class="stack running">nested</div>
-                <div class="stack middle">contrived</div>
-                <div class="stack global">global</div>
-            </div>
+        <div style="position: relative; margin-top: 40px;">
             <pre class="explained">
                 <code>
 function contrived(a) {
@@ -163,6 +158,11 @@ contrived.call({ name: "baz" }, "bar");
 > bar
                 </code>
             </pre>
+            <div class="stack-wrapper">
+                <div class="stack running">nested</div>
+                <div class="stack middle">contrived</div>
+                <div class="stack global">global</div>
+            </div>
         </div>
     </script>
 </body>
