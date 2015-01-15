@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Execution Contexts</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+    <div class="left">
+        <div class="overview">
+            <h1>Execution Contexts</h1>
+            <ol>
+                <li><a href="" data-content-link="what1">What?</a></li>
+                <li><a href="" data-content-link="why">Why?</a></li>
+                <li><a href="" data-content-link="how1">How?</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="right">
+        <div id="content" class="content"></div>
+        <center>
+        <div id="footer">
+            <ol id="pag" class="pagination"></ol>
+        </div>
+        </center>
+    </div>
+    <script src="js/util.js"></script>
+    <script src="js/click-jacker.js"></script>
+
+    <script id="what1" type="text/content">
+        <h2>What?</h2>
+        <p>
+            &ldquo;An execution context is <b>purely a specification mechanism</b> and need not correspond to any particular artefact of an ECMAScript implementation.&rdquo;
+        </p>
+        <cite><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank">ECMAScript 5, page 57</a></cite>
+    </script>
+
+    <script id="wha-pag" type="text/content">
+        <li><a href="" data-content-link="what1"></a></li>
+        <li><a href="" data-content-link="what2"></a></li>
+        <li><a href="" data-content-link="what3"></a></li>
+    </script>
+
+    <script id="what2" type="text/content">
+        <h2>What? Spec for impl of </h2>
+        <pre>
+            <code>
+function mama(a, b) {
+    // Lexical Environment with Environment Record
+    var c = "hi";
+    
+    function kid(txt) {
+        // Lexical Environment with Environment Record
+    }
+
+    function child() {
+        // Lexical Environment with Environment Record
+        console.log(txt);
+    }
+
+    child(c);
+}
+
+mama("foo", 2);
+            </code>
+        </pre>
+    </script>  
+
+    <script id="what3" type="text/content">
+        <h2>What? Spec for impl of </h2>
+        <pre>
+            <code>
+
+            </code>
+        </pre>
+    </script>    
+
+    <script id="why" type="text/content">
+        <h2>Why <b class="subtle">care</b>?</h2>
+        <ul>
+            <li>Implement JavaScript</li>
+            <li>Understand JavaScript</li>
+        </ul>
+    </script>
+
+    <script id="how1" type="text/content">
+        <h2>How?</h2>
+        <ol>
+            <li>Set <i class="var">strict</i> to <i class="val">true</i> or <i class="val">false</i></li>
+            <li>Create <i class="var">arguments</i></li>
+        </ol>
+    </script>
+
+    <script id="how2" type="text/content">
+        <h2>How?</h2>
+        <ol>
+            <li>Set <i class="var">strict</i> to <i class="val">true</i> or <i class="val">false</i></li>
+            <li>Create <i class="var">arguments</i></li>
+        </ol>
+    </script>
+</body>
+</html>

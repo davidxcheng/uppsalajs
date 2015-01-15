@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Uppsala.js 2015-01-15</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Uppsala.js 2015-01-15</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<div id="right">
-		<button data-btn-run>Get Cracking</button>
-	</div>
-	<div id="left">
-		<div id="output"></div>
-	</div>
+    <div class="left">
+        <button data-btn-run>Get Cracking</button>
+    </div>
+    <div class="right">
+        <div id="output"></div>
+    </div>
 
-	<script src="js/util.js"></script>
-	<script>
-		var main = "hey";
+    <script src="js/util.js"></script>
+    <script>
+        var main = "hey";
 
-		function duplicateIdentifier(foo, foo) {
-			return foo;
-		}
+        function duplicateIdentifier(foo, foo) {
+            return foo;
+        }
 
-		$("[data-btn-run]").on("click", function() {
-			output.innerHTML = duplicateIdentifier("hello", "world");
-		});
-	</script>
+        $("[data-btn-run]").on("click", function() {
+            output.innerHTML = duplicateIdentifier("hello", "world");
+        });
+    </script>
 </body>
 </html>
