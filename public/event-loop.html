@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Loop</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+    <div class="menu">
+        <div class="overview">
+            <h1>Event Loop</h1>
+            <ol>
+                <li><a href="" data-content-link="single1">Single Threaded</a></li>
+                <li><a href="" data-content-link="work1">Web Workers</a></li>
+                <li><a href="" data-content-link="custom">Custom Events</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="right">
+        <div id="content" class="content"></div>
+        <div id="footer">
+            <ol id="pag" class="pagination"></ol>
+        </div>
+    </div>
+    <script src="js/util.js"></script>
+    <script src="js/click-jacker.js"></script>
+
+    <script id="sin-pag" type="text/content">
+        <li><a href="" data-content-link="single1"></a></li>
+        <li><a href="" data-content-link="single2"></a></li>
+    </script>
+
+    <script id="wor-pag" type="text/content">
+        <li><a href="" data-content-link="work1"></a></li>
+        <li><a href="" data-content-link="work2"></a></li>
+    </script> 
+
+    <script id="single1" type="text/content">
+        <h2>Single Threaded</h2>
+        <img src="img/single.png" alt="js event loop" style="margin-top: 20px;">
+        <div stype="position: relative">
+            <cite><a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-loop-explained/" target="_blank">Carbon Five Blog</a></cite>
+        </div>
+    </script>
+
+    <script id="single2" type="text/content">
+        <h2>Not Gonna Happen</h2>
+        <div>
+            <pre class="explained">
+                <code>
+$(document).ready(function() {
+    var items = [];
+    
+    $.get("/items", function(res) {
+        items = res;
+    });
+
+    // Other page init stuff
+
+    if (items.length > 0) {
+        // populate list
+    }
+});
+                </code>
+            </pre>
+        </div>
+    </script>   
+
+    <script id="work1" type="text/content">
+        <h2>Web Worker</h2>
+        <img src="img/worker.png" alt="js event loops" style="margin-top: 20px;">
+        <div stype="position: relative">
+            <cite><a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-loop-explained/" target="_blank">Carbon Five Blog</a></cite>
+        </div>
+        
+    </script>
+
+    <script id="work2" type="text/content">
+        <ul>
+            <li>Seperate thread - Seperate file</li>
+            <li>postMessage</li>
+        </ul>
+        <pre>
+            <code>
+// main script
+var worker = new Worker('doWork.js');
+
+worker.addEventListener('message', function(e) {
+  console.log('Worker said: ', e.data);
+}, false);
+
+worker.postMessage('Hello World'); // Send data to our worker.
+
+// doWork.js
+self.addEventListener('message', function(e) {
+  self.postMessage(e.data);
+}, false);
+            </code>
+        </pre>
+    </script> 
+
+    <script id="custom" type="text/content">
+        <h2>Custom Events</h2>
+        <pre>
+            <code>
+document.addEventListener("add/artist", function(e) {
+    content.innerHTML("&lt;img src='img/swift.jpeg'>&lt;div&gt;" + e.detail.name + "&lt;/div&gt;");
+});
+
+document.dispatchEvent(new CustomEvent("add/artist", {
+    bubbles: true,
+    detail: { id: 1989, name: "Swift" }
+}));
+            </code>
+        </pre>
+    </script> 
+
+</body>
+</html>
