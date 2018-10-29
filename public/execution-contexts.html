@@ -141,13 +141,13 @@ function contrived(a) {
 
     function nested(c) {
         console.log(b); // b?
-        console.log(c); // console?
+        console.log(c); // c?
     }
 }
 
 contrived.call({ name: "baz" }, "bar");
-> foo baz
-> bar
+> foo bar
+> baz
                 </code>
             </pre>
             <div class="stack-wrapper">
